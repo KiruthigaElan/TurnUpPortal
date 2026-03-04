@@ -9,12 +9,13 @@ using TurnUpPortal.Utilities;
 
 namespace TurnUpPortal.Tests
 {
+    [Parallelizable]
     [TestFixture]
     public class TM_Tests : CommonDriver
     {
-       // IWebDriver driver = null!;
+        // IWebDriver driver = null!;
         [SetUp]
-       
+
         public void SetUpSets()
 
         {
@@ -33,30 +34,37 @@ namespace TurnUpPortal.Tests
             homePageobj.NavigateToTM(driver);
 
         }
-        
+
         [Test]
         public void CreateTimeTest()
         {
             //TM page object initilization and definition
             TMPage tmpageObj = new TMPage();
             tmpageObj.CreateRecord(driver);
+       
         }
-       /* [Test]
+
+       [Test]
         public void EditTime_Test()
         {
+            
+            
 
+            TMPage tmpageObj = new TMPage();
+            tmpageObj.EditRecord(driver);
         }
-        [Test]
+        /*[Test]
         public void DeleteTime_Test()
         {
 
         }
         */
-        [TearDown]
+      /*[TearDown]
         public void CloseTestRun()
         {
             driver.Quit();
         }
+      */
     }
 
 }
