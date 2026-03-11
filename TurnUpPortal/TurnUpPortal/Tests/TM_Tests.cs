@@ -59,12 +59,12 @@ namespace TurnUpPortal.Tests
 
         }
         */
-      /*[TearDown]
+      [TearDown]
         public void CloseTestRun()
         {
             driver.Quit();
         }
-      */
+      
     }
 
 }

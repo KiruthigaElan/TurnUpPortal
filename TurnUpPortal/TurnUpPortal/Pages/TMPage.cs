@@ -15,6 +15,7 @@ namespace TurnUpPortal.Pages
         public void CreateRecord(IWebDriver driver)
         {
             //Click on create button
+            Thread.Sleep(2000);
             IWebElement createNewRecord = driver.FindElement(By.XPath("/html[1]/body[1]/div[4]/p[1]/a[1]"));
             createNewRecord.Click();
 
@@ -52,22 +53,49 @@ namespace TurnUpPortal.Pages
             IWebElement goToLastPage = driver.FindElement(By.XPath("/html[1]/body[1]/div[4]/div[1]/div[1]/div[4]/a[4]/span[1]"));
             goToLastPage.Click();
             Thread.Sleep(2000);
-
-            IWebElement newCode = driver.FindElement(By.XPath("//div[@class='k-grid-content']//table/tbody/tr[last()]/td[1]"));
-            //  Assert.That(newCode.Text == "TA Feb 2026 Program", "Time Record has not created successfully");
-
-            Thread.Sleep(3000);
-            if (newCode.Text == "TA Feb")
-            {
-                Assert.Pass("Time Record has created successfully");
-            }
-            else
-            {
-                Assert.Fail("Time Record has not created successfully");
-            }
         }
-            
-            public void EditRecord(IWebDriver driver)
+
+            /*
+            Assert.That(newCode.Text == "TA Feb 2026 Program", "Time Record has not created successfully");
+            Assert.That(newDesc.Text == "TA Feb 2026 Program", "Actual description and expected description does not match");
+            Assert.That(newPrice.Text == "1000", "Actual price and expected price does not match");
+            */
+
+            public string GetCode(IWebDriver driver)
+            {
+            IWebElement newCode = driver.FindElement(By.XPath("//div[@class='k-grid-content']//table/tbody/tr[last()]/td[1]"));
+            return newCode.Text;
+            }
+
+            public string GetDescription(IWebDriver driver)
+             {
+
+            IWebElement newDesc = driver.FindElement(By.XPath("/html[1]/body[1]/div[4]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[last()]/td[3]"));
+            return newDesc.Text;
+             }
+
+        public string GetPrice(IWebDriver driver) {
+            IWebElement newPrice = driver.FindElement(By.XPath("/html[1]/body[1]/div[4]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[last()]/td[4]"));
+            return newPrice.Text;
+
+
+        }
+
+
+        /*
+        Thread.Sleep(3000);
+        if (newCode.Text == "TA Feb")
+        {
+            Assert.Pass("Time Record has created successfully");
+        }
+        else
+        {
+            Assert.Fail("Time Record has not created successfully");
+        }
+        */
+
+
+        public void EditRecord(IWebDriver driver)
             {
 
             IWebElement goToLastPage = driver.FindElement(By.XPath("/html[1]/body[1]/div[4]/div[1]/div[1]/div[4]/a[4]/span[1]"));
@@ -80,7 +108,8 @@ namespace TurnUpPortal.Pages
             Thread.Sleep(2000);
 
             IWebElement codeTextBox = driver.FindElement(By.Id("Code"));
-            codeTextBox.SendKeys("Edit");
+            codeTextBox.Clear();
+            codeTextBox.SendKeys("TA FebEdit");
 
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
@@ -93,6 +122,7 @@ namespace TurnUpPortal.Pages
 
             IWebElement newCode = driver.FindElement(By.XPath("//div[@class='k-grid-content']//table/tbody/tr[last()]/td[1]"));
             Assert.That(newCode.Text == "TA FebEdit", "Time Record has not been updated successfully");
+            Console.WriteLine("Time Record has been updated successfully");
             // Assert.That(codeTextBox.Displayed, "Edit page did not open");
         }
     }
